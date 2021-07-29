@@ -7,7 +7,100 @@
     <title>Document</title>
 </head>
 <body>
-    Hello from Sunday class.
+    <form onsubmit="return AddNewPerson();" id="form">
+        <label for="name">Name : <input type="text" name="name" id="name" required></label><br><br>
+        <label for="address">Address : <textarea type="text" name="address" id="address" required></textarea></label><br><br>
+        <label for="gender">Gender : 
+            <label for="male"><input type="radio" selected name="gender" id="male" value="Male">Male</label>
+            <label for="female"><input type="radio" name="gender" id="female" value="Female">Female</label>
+        </label><br><br>
+        <label for="education">Education : <select name="education" id="education" required>
+            <option value="Matric">Matric</option>
+            <option value="Inter">Inter</option>
+            <option value="BS">BS</option>
+        </select>
+        </label><br><br>
+        <label for="profession">Profession : <select name="profession" id="profession" required>
+                <option value="Teacher">Teacher</option>
+                <option value="Office Worker">Office Worker</option>
+                <option value="Software Engineer">Software Engineer</option>
+            </select>
+        </label><br><br>
+        <input type="submit" id="submit" value="Add New Person">
+    </form>
+<script>
+    //task 1
+    var items = [
+        { name: "juice", price: "50", quantity: "3" },
+        { name: "cookie", price: "30", quantity: "9" },
+        { name: "shirt", price: "880", quantity: "1" },
+        { name: "pen", price: "100", quantity: "2" }
+    ]
+    var totalPrice = 0;
+    for (let index = 0; index < items.length; index++) {
+        let price = parseInt(items[index].price) * parseInt(items[index].quantity);
+        items[index].total = price + "";
+        totalPrice += price;
+    }
+    console.log(items);
+    console.log("Total Price: " + totalPrice);
+
+    //task 2
+    var obj = { name: "Ibrahim", email: "ibrahim@gmail.com", password: "pass123", age: "22", gender: "male", city: "Karachi", country: "Pakistan"}
+    console.log(obj.hasOwnProperty("age")) //return true if object has 'age' property
+    console.log(obj.hasOwnProperty("country")) //returns true if object has 'country' property
+    console.log(obj.firstName !== undefined) // returns true if object has 'firstName' property
+    console.log(obj.lastName !== undefined) // returns true if object has 'lastName' property
+
+    //task 3
+    class Human
+    {
+        constructor(name)
+        {
+            this.name = name;
+        }
+    }
+    var Human1 = new Human("Basit");
+    var Human2 = new Human("Ibrahim");
+    var Human3 = new Human("Huzaifa");
+    console.log(Human1)
+    console.log(Human2)
+    console.log(Human3)
+
+    //task 4
+    class Person
+    {
+        constructor(name, gender, address, education, profession)
+        {
+            this.name = name;
+            this.gender = gender;
+            this.address = address;
+            this.education = education;
+            this.profession = profession;
+        }
+    }
+    var personsList = [];
+    function AddNewPerson(){
+        event.preventDefault();
+        var name = document.getElementById("name").value;
+        var address = document.getElementById("address").value;
+        var genders = document.querySelectorAll('input[name="gender"]');
+        let selectedValue;
+        for (const gender of genders) {
+            if (gender.checked) {
+                selectedValue = gender.value;
+                break;
+            }
+        } 
+        var education = document.getElementById("education").value;
+        var profession = document.getElementById("profession").value;
+
+        var person = new Person(name,selectedValue,address,education,profession);
+        personsList.push(person);
+        console.log(personsList);
+        document.getElementById("form").reset();
+    }
     
+</script>    
 </body>
 </html>
